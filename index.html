@@ -23,7 +23,7 @@
           </header>
         </section>
         <section>
-          <form action="">
+          <form>
             <label for="input-form">Ayo Input Tugasmu</label>
             <br />
             <input
@@ -31,21 +31,17 @@
               id="input-form"
               placeholder="Masukkan tugasmu di sini"
             />
+            <br />
+            <label for="kuy-date">Pilih Tanggal: </label>
+            <br />
+            <input type="date" id="kuy-date" name="date" />
+            <br />
             <button>Tambah Tugas</button>
           </form>
         </section>
         <section class="kuy-section2">
-          <h3>Daftar Tugas</h3>
-          <ul id="todo-list">
-            <li class="todo">
-              <input type="checkbox" id="todo-1" />
-              <label for="todo-1"></label>
-              <label for="todo-1">Build project todo</label>
-              <button class="delete">
-                <img src="./assets/images/delete-img.png" alt="delete" />
-              </button>
-            </li>
-          </ul>
+          <h3 class="todo-header"></h3>
+          <ul id="todo-list"></ul>
         </section>
       </div>
     </main>
