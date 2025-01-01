@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kuy ToDo</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <div class="kuy-wrapper">
+        <section class="kuy-section1">
+          <header>
+            <nav>
+              <h1>Kuy To-Do List</h1>
+              <p>
+                User
+                <span
+                  ><img src="./assets/images/user-logo.png" alt="user-logo"
+                /></span>
+              </p>
+            </nav>
+          </header>
+        </section>
+        <section>
+          <form action="">
+            <label for="input-form">Ayo Input Tugasmu</label>
+            <br />
+            <input
+              type="text"
+              id="input-form"
+              placeholder="Masukkan tugasmu di sini"
+            />
+            <button>Tambah Tugas</button>
+          </form>
+        </section>
+        <section class="kuy-section2">
+          <h3>Daftar Tugas</h3>
+          <ul id="todo-list">
+            <li class="todo">
+              <input type="checkbox" id="todo-1" />
+              <label for="todo-1"></label>
+              <label for="todo-1">Build project todo</label>
+              <button class="delete">
+                <img src="./assets/images/delete-img.png" alt="delete" />
+              </button>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
