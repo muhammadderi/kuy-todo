@@ -3,8 +3,10 @@ const kuyInput = document.getElementById("input-form");
 const kuyDate = document.getElementById("kuy-date");
 const kuyListUL = document.getElementById("todo-list");
 const kuyHeader = document.querySelector(".todo-header");
+const doneListUL = document.querySelector(".done-list");
 
 const allTodos = [];
+const allDone = [];
 
 kuyTodo.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -39,16 +41,38 @@ function createTodoItem(todo, todoIndex) {
   kuyList.className = "todo";
   kuyList.innerHTML = `
     <input type="checkbox" id="${kuyId}" />
-    <label for="${kuyId}">
-      <span>${todo.text}</span>
-      <span>(${todo.date})</span>
+    <label for="${kuyId}" class="detail-task">
+      <h4 id="kuy-content">${todo.text}</h4>
+      <span>${todo.date}</span>
     </label>
-    <button class="delete">
-      <img src="./assets/images/delete-img.png" alt="delete" />
-    </button>
   `;
+
+  const kuyCheckbox = kuyList.querySelector(`#${kuyId}`);
+  const kuyTextCross = kuyList.querySelector("#kuy-content");
+ 
+
+  kuyCheckbox.addEventListener("change", function() {
+    if (this.checked) {
+      kuyTextCross.style.textDecoration = "line-through";
+    } else {
+      kuyTextCross.style.textDecoration = "none";
+    }
+  });
+
+  // deleteButton.addEventListener("click", function() {
+  //   if (kuyCheckbox.checked) {
+  //     allTodos.splice(todoIndex, 1);
+  //     updateKuyList();
+  //     allTodos.length === 0 ? kuyHeader.innerText = "" : "";
+  //   } 
+  // })
+
   return kuyList;
 }
 
-console.log("Daftar semua tugas:", allTodos);
-console.log("Tugas yang dirender:", todo);
+
+{/* <button class="delete">
+<img src="./assets/images/delete-img.png" alt="delete" />
+</button> 
+ const deleteButton = kuyList.querySelector(".delete");
+*/}
