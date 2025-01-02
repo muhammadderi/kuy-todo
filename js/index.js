@@ -3,11 +3,13 @@ const kuyInput = document.getElementById("input-form");
 const kuyDate = document.getElementById("kuy-date");
 const kuyListUL = document.getElementById("todo-list");
 const kuyHeader = document.querySelector(".todo-header");
-const doneListUL = document.querySelector(".done-list");
+const kuyHeaderDone = document.querySelector(".todo-header-done");
+const doneListUL = document.getElementById("done-list");
 
 const allTodos = [];
-const allDone = [];
+const doneTodos = [];
 
+// Event listener untuk tombol tambah tugas
 kuyTodo.addEventListener("submit", function (e) {
   e.preventDefault();
   addTodo();
@@ -19,6 +21,7 @@ function addTodo() {
   if (kuyText.length > 0 && kuyDateTodo.length > 0) {
     allTodos.push({ text: kuyText, date: kuyDateTodo });
     kuyHeader.innerText = "Daftar Tugas";
+    kuyHeaderDone.innerText = doneTodos.length > 0 ? "Tugas Selesai" : "";
     updateKuyList();
     kuyInput.value = "";
     kuyDate.value = "";
@@ -29,10 +32,23 @@ function addTodo() {
 
 function updateKuyList() {
   kuyListUL.innerHTML = "";
+  doneListUL.innerHTML = "";
+
+  // Render daftar tugas
   allTodos.forEach((todo, todoIndex) => {
     const kuyItem = createTodoItem(todo, todoIndex);
     kuyListUL.append(kuyItem);
   });
+
+  // Render daftar tugas selesai
+  doneTodos.forEach((todo) => {
+    const kuyItem = createDoneItem(todo);
+    doneListUL.append(kuyItem);
+  });
+
+  // Perbarui header
+  kuyHeader.innerText = allTodos.length > 0 ? "Daftar Tugas" : "";
+  kuyHeaderDone.innerText = doneTodos.length > 0 ? "Tugas Selesai" : "";
 }
 
 function createTodoItem(todo, todoIndex) {
@@ -48,31 +64,34 @@ function createTodoItem(todo, todoIndex) {
   `;
 
   const kuyCheckbox = kuyList.querySelector(`#${kuyId}`);
-  const kuyTextCross = kuyList.querySelector("#kuy-content");
- 
-
-  kuyCheckbox.addEventListener("change", function() {
+  kuyCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      kuyTextCross.style.textDecoration = "line-through";
-    } else {
-      kuyTextCross.style.textDecoration = "none";
+      moveToDone(todo, todoIndex);
     }
   });
-
-  // deleteButton.addEventListener("click", function() {
-  //   if (kuyCheckbox.checked) {
-  //     allTodos.splice(todoIndex, 1);
-  //     updateKuyList();
-  //     allTodos.length === 0 ? kuyHeader.innerText = "" : "";
-  //   } 
-  // })
 
   return kuyList;
 }
 
+function createDoneItem(todo) {
+  const kuyList = document.createElement("li");
+  kuyList.className = "done";
+  kuyList.innerHTML = `
+    <span>${todo.text}</span> - <span>${todo.date}</span>
+    <button class="delete-button">Hapus</button>
+  `;
 
-{/* <button class="delete">
-<img src="./assets/images/delete-img.png" alt="delete" />
-</button> 
- const deleteButton = kuyList.querySelector(".delete");
-*/}
+  const deleteButton = kuyList.querySelector(".delete-button");
+  deleteButton.addEventListener("click", function () {
+    doneTodos.splice(doneTodos.indexOf(todo), 1);
+    updateKuyList();
+  });
+
+  return kuyList;
+}
+
+function moveToDone(todo, todoIndex) {
+  doneTodos.push(todo);
+  allTodos.splice(todoIndex, 1);
+  updateKuyList();
+}
