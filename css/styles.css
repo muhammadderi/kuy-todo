@@ -24,9 +24,7 @@ main {
   padding: 10px 20px;
 }
 
-.kuy-wrapper {
-  padding: 10px;
-}
+/* section1 */
 
 .kuy-section1 nav {
   display: flex;
@@ -34,151 +32,125 @@ main {
   justify-content: space-between;
 }
 
-header img {
+.kuy-section1 img {
   width: 30px;
   height: 30px;
+  border-radius: 50%;
 }
 
-header p {
+.kuy-section1 h1 {
+  font-size: 24px;
+}
+
+/* section2 */
+
+.kuy-section2,
+.kuy-section3,
+.kuy-section4 {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  align-items: center;
 }
 
-header h1 {
-  font-weight: bold;
-  font-size: 20px;
+.kuy-section2 h1 {
+  text-align: center;
   text-transform: uppercase;
 }
 
-form {
-  letter-spacing: 1px;
+.kuy-section2 label {
+  font-size: 16px;
+  line-height: 30px;
 }
 
-form label,
-h3 {
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-#input-form {
-  border-radius: 5px;
-  border: 1px solid var(--primary-color);
+.kuy-section2 textarea {
+  border: 2px solid var(--primary-color);
   color: var(--primary-color);
-  padding: 5px;
-  width: 80%;
-  box-sizing: border-box;
-}
-
-#todo-level {
-  padding: 5px;
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  border-radius: 5px;
-}
-
-.date-todo{
-  font-size: 12px;
-}
-
-form button {
-  border: none;
-  background-color: var(--primary-color);
   padding: 10px;
-  color: #fff;
-  border-radius: 10px;
-  font-weight: bold;
-  margin-top: 10px;
+  border-radius: 5px;
 }
 
-form button:hover {
+.kuy-section2 textarea:focus {
+  outline: none;
+}
+
+.kuy-section2 select {
+  border: 2px solid var(--primary-color);
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.kuy-section2 button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.kuy-section2 button:hover {
   background-color: #fff;
   color: var(--primary-color);
   border: 2px solid var(--primary-color);
 }
 
-.detail-task.span::first-letter{
+/* Section 3 */
+.kuy-section3 h3,
+.kuy-section4 h3 {
   text-transform: uppercase;
+  padding: 10px 0;
+  margin: 0;
 }
 
-.kuy-section2 {
-  display: flex;
-  flex-direction: column;
-}
-
-.kuy-section2 ul li {
-  text-decoration: none;
+.kuy-section3 ul,
+.kuy-section4 ul {
   list-style-type: none;
 }
 
-.kuy-section2 img {
-  width: 20px;
-  height: 20px;
-}
-
-.kuy-section2 button {
-  border: none;
-  background-color: transparent;
-  margin-left: auto;
+.todo,
+.done {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  background-color: #5cb338;
+  color: #fff;
+  padding: 0 20px;
 }
 
 #todo-list {
   padding: 0;
-
-}
-
-.todo, .done {
-  display: flex;
-  align-items: center;
-  border: 2px solid var(--primary-color);
-  border-radius: 5px;
-  margin-bottom: 5px;
-  padding: 20px;
-  gap: 10px;
-}
-
-#done-list {
-  padding: 0px;
-  margin: 0;
-}
-
-.kuy-section2 h3 {
-  padding: 0;
-  margin-bottom: 0;
 }
 
 .detail-task {
- display: flex;
- justify-content: center;
- align-items: center;
- gap: 10px;
-}
-
-.detail-task span {
-  font-size: 14px;
-}
-
-input[type="checkbox"]  {
-  width: 18px;
-  height: 18px;
-}
-
-input[type="checkbox"]:checked + .detail-task h4 {
-  text-decoration: line-through;
-}
-
-.delete-button {
-  background-color: transparent;
-  border: none;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  margin: 0;
+  gap: 10px;
 }
 
-.delete-button img {
-  width: 20px;
-  height: 20px;
+/* section 4 */
+.kuy-section4 button {
+  background-color: transparent;
+  width: 50px;
+  height: 50x;
   border: none;
 }
 
+.kuy-section4 img {
+  width: 20px;
+  height: 20px;
+}
+
+#done-list {
+  padding: 0 20px;
+  margin: 20px 0;
+}
