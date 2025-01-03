@@ -62,22 +62,24 @@ h3 {
   text-transform: uppercase;
 }
 
-form input {
-  margin: 5px 0;
-  border: 2px solid var(--primary-color);
-  padding: 10px;
-  border-radius: 10px;
-  width: 70%;
-}
-
-form input::placeholder {
+#input-form {
+  border-radius: 5px;
+  border: 1px solid var(--primary-color);
   color: var(--primary-color);
+  padding: 5px;
+  width: 80%;
+  box-sizing: border-box;
 }
 
-form input:focus {
-  color: #fff;
-  background-color: var(--primary-color);
-  border: 2px solid #fff;
+#todo-level {
+  padding: 5px;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+}
+
+.date-todo{
+  font-size: 12px;
 }
 
 form button {
@@ -94,6 +96,10 @@ form button:hover {
   background-color: #fff;
   color: var(--primary-color);
   border: 2px solid var(--primary-color);
+}
+
+.detail-task.span::first-letter{
+  text-transform: uppercase;
 }
 
 .kuy-section2 {
@@ -122,15 +128,19 @@ form button:hover {
 
 }
 
-.todo {
+.todo, .done {
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
   border: 2px solid var(--primary-color);
   border-radius: 5px;
   margin-bottom: 5px;
-  padding: 5px;
-  gap: 5px;
+  padding: 20px;
+  gap: 10px;
+}
+
+#done-list {
+  padding: 0px;
+  margin: 0;
 }
 
 .kuy-section2 h3 {
@@ -139,19 +149,10 @@ form button:hover {
 }
 
 .detail-task {
-  flex: 1;
-  flex-direction: column;
-}
-
-
-.detail-task h4 {
-  padding: 0;
-  margin: 0;
-  font-size: 18px;
-}
-
-.detail-task h4::first-letter {
-  text-transform: capitalize;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ gap: 10px;
 }
 
 .detail-task span {
@@ -166,3 +167,18 @@ input[type="checkbox"]  {
 input[type="checkbox"]:checked + .detail-task h4 {
   text-decoration: line-through;
 }
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.delete-button img {
+  width: 20px;
+  height: 20px;
+  border: none;
+}
+

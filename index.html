@@ -14,7 +14,7 @@
             <nav>
               <h1>Kuy To-Do List</h1>
               <p>
-                User
+                Muhammad Dery | Staff IT
                 <span
                   ><img src="./assets/images/user-logo.png" alt="user-logo"
                 /></span>
@@ -26,15 +26,16 @@
           <form>
             <label for="input-form">Ayo Input Tugasmu</label>
             <br />
-            <input
-              type="text"
-              id="input-form"
-              placeholder="Masukkan tugasmu di sini"
-            />
+           <textarea name="textarea" id="input-form" rows="3" cols="50">Silahkan input tugasmu..</textarea>
             <br />
-            <label for="kuy-date">Pilih Tanggal: </label>
+            <label for="kuy-level">Level Tugas </label>
             <br />
-            <input type="date" id="kuy-date" name="date" />
+            <select name="todo-level" id="todo-level">
+              <option value="#">Pilih Level</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
             <br />
             <button>Tambah Tugas</button>
           </form>
@@ -46,6 +47,7 @@
         <section class="kuy-section3">
           <h3 class="todo-header-done"></h3>
           <ul id="done-list"></ul>
+          
         </section>
       </div>
     </main>
