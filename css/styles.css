@@ -114,11 +114,17 @@ main {
   border: 2px solid var(--primary-color);
 }
 
+.container-list,
+.container-done {
+  overflow-x: auto;
+  max-width: 80%;
+}
+
 #table-list,
 #table-done {
   border-collapse: collapse;
+  min-width: 600px;
   width: 80%;
-  overflow-x: scroll;
 }
 
 #table-list td,
@@ -187,5 +193,15 @@ main {
 
   main button {
     font-size: 10px;
+  }
+
+  #container-done,
+  #container-list {
+    overflow-x: auto;
+  }
+
+  #table-list,
+  #table-done {
+    min-width: 600px;
   }
 }
