@@ -118,6 +118,7 @@ main {
 #table-done {
   border-collapse: collapse;
   width: 80%;
+  overflow-x: scroll;
 }
 
 #table-list td,
@@ -153,7 +154,12 @@ main {
   text-align: center;
 }
 
-/* Responsive */
+#todo-date {
+  border: 2px solid var(--primary-color);
+  padding: 5px;
+  border-radius: 5px;
+  color: var(--primary-color);
+}
 
 @media only screen and (max-width: 767px) {
   body {

@@ -9,6 +9,7 @@ const doneListTableBody = document.getElementById("done-list");
 const deleteTodoList = document.querySelector(".delete-list");
 const deleteDoneList = document.querySelector(".delete-done-list");
 const kuyListTableDone = document.getElementById("todo-done-list");
+const kuyInputDate = document.getElementById("todo-date");
 
 let allTodos = [];
 let doneTodos = [];
@@ -18,14 +19,32 @@ kuyTodo.addEventListener("submit", function (e) {
   addTodo();
 });
 
+function formatDate(date) {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const hours = String(d.getHours()).padStart(2, "0");
+  const minutes = String(d.getMinutes()).padStart(2, "0");
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
+
 function addTodo() {
   const kuyText = kuyInput.value.trim();
   const kuyLevelTodo = kuyLevel.value;
+  const currentDate = formatDate(new Date());
+  const inputDate = kuyInputDate.value.replace("T", " ");
 
   if (kuyText.length > 0 && kuyLevelTodo.length > 0) {
-    allTodos.push({ text: kuyText, level: kuyLevelTodo });
+    allTodos.push({
+      text: kuyText,
+      level: kuyLevelTodo,
+      kuyDate: inputDate,
+      createdDate: currentDate,
+    });
     kuyInput.value = "";
     kuyLevel.value = "Low";
+    inputDate.value = "";
     updateKuyList();
   } else {
     alert("Harap isi tugas dan pilih level!");
@@ -55,6 +74,7 @@ function updateKuyList() {
         <th>Tanggal</th>
         <th>Tugas</th>
         <th>Level</th>
+        <th>Batas Waktu</th>
       </tr>
     `;
   } else {
@@ -66,6 +86,8 @@ function updateKuyList() {
      <tr>
         <th>Tugas</th>
         <th>Level</th>
+        <th>Di Buat</th>
+        <th>Batas Waktu</th>
         <th>Aksi</th>
         </tr>
     `;
@@ -81,9 +103,10 @@ function createTodoRow(todo, index) {
 
   row.innerHTML = `
     <td><input type="checkbox" data-index="${index}" /></td>
-    <td class="todo-line">${new Date().toLocaleString()}</td>
+    <td class="todo-line">${todo.createdDate}</td>
     <td class="todo-line">${todo.text}</td>
     <td class="${todo.level.toLowerCase()}">${todo.level}</td>
+    <td>${todo.kuyDate.toLocaleString()}</td>
   `;
 
   // const checkbox = row.querySelector("input[type='checkbox']");
@@ -111,6 +134,8 @@ function createDoneRow(todo, index) {
   row.innerHTML = `
     <td>${todo.text}</td>
     <td class="${todo.level.toLowerCase()}">${todo.level}</td>
+    <td>${todo.createdDate}</td>
+    <td>${todo.kuyDate}</td>
     <td><button class="delete-button"><img src="./assets/images/delete-img.png" alt="delete-img"></button></td>
   `;
 
