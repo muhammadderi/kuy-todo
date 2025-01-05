@@ -32,7 +32,7 @@
 Silahkan input tugasmu..</textarea
             >
             <br />
-            <label for="kuy-level">Level Tugas </label>
+            <label for="todo-level">Level Tugas </label>
             <br />
             <select name="todo-level" id="todo-level" required>
               <option value="Low">Low</option>
@@ -40,17 +40,24 @@ Silahkan input tugasmu..</textarea
               <option value="High">High</option>
             </select>
             <br />
-            <button>Tambah Tugas</button>
+            <button type="submit">Tambah Tugas</button>
           </form>
         </section>
         <section class="kuy-section3">
           <h3 class="todo-header"></h3>
           <span class="delete-list"></span>
-          <ul id="todo-list"></ul>
+          <table id="table-list">
+            <thead id="todo-list-header"></thead>
+            <tbody id="todo-list"></tbody>
+          </table>
         </section>
         <section class="kuy-section4">
           <h3 class="todo-header-done"></h3>
-          <ul id="done-list"></ul>
+          <span class="delete-done-list"></span>
+          <table id="table-done">
+            <thead id="todo-done-list"></thead>
+            <tbody id="done-list"></tbody>
+          </table>
         </section>
       </div>
     </main>

@@ -97,109 +97,6 @@ main {
   border: 2px solid var(--primary-color);
 }
 
-/* Section 3 */
-.kuy-section3 h3,
-.kuy-section4 h3 {
-  text-transform: uppercase;
-  padding: 10px 0;
-  margin: 0;
-}
-
-.kuy-section3 ul,
-.kuy-section4 ul {
-  list-style-type: none;
-}
-
-.todo,
-.done {
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  padding: 0 10px;
-  align-items: center;
-  gap: 5px;
-  border: 2px solid var(--primary-color);
-  border-radius: 5px;
-  background-color: #5cb338;
-  color: #fff;
-  margin: 0;
-  margin-bottom: 10px;
-}
-
-#todo-list {
-  padding: 0;
-}
-
-.detail-task {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  gap: 10px;
-}
-
-input[type="checkbox"]:checked + label {
-  text-decoration: line-through;
-  color: gray; /* Opsional, untuk membuat teks lebih pudar */
-}
-
-/* section 4 */
-.kuy-section4 button {
-  background-color: transparent;
-  width: 50px;
-  height: 50x;
-  border: none;
-}
-
-.kuy-section4 img {
-  width: 20px;
-  height: 20px;
-}
-
-#done-list {
-  padding: 0 20px;
-  margin: 20px 0;
-}
-
-.done {
-  padding: 15px;
-  min-width: 400px;
-}
-
-.todo {
-  min-width: 400px;
-}
-
-.done button:hover {
-  background-color: red;
-  border-radius: 50px;
-}
-
-.todo-header-done {
-  color: var(--primary-color);
-}
-
-/* level priority */
-.low,
-.medium,
-.high {
-  width: 15px;
-  height: 15px;
-  border-radius: 50px;
-}
-
-.low {
-  background-color: green;
-}
-
-.medium {
-  background-color: yellow;
-}
-
-.high {
-  background-color: red;
-}
-
 /* delete list  */
 
 .todolist-delete {
@@ -208,10 +105,81 @@ input[type="checkbox"]:checked + label {
   color: #fff;
   border-radius: 5px;
   padding: 10px;
+  margin-bottom: 15px;
 }
 
 .todolist-delete:hover {
   background-color: red;
   color: #fff;
   border: 2px solid var(--primary-color);
+}
+
+#table-list,
+#table-done {
+  border-collapse: collapse;
+  width: 80%;
+}
+
+#table-list td,
+#table-list th,
+#table-done td,
+#table-done th {
+  border: 1px solid var(--primary-color);
+  padding: 8px;
+  text-align: center;
+}
+
+#table-list th,
+#table-done th {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+#table-done img {
+  width: 25px;
+  height: 25px;
+}
+
+#table-done button {
+  background-color: transparent;
+  border: none;
+}
+
+#table-done button:hover {
+  width: 35px;
+  height: 35px;
+  background-color: red;
+  border-radius: 50px;
+  text-align: center;
+}
+
+/* Responsive */
+
+@media only screen and (max-width: 767px) {
+  body {
+    font-size: 12px;
+    min-height: auto;
+    margin: 40px 0;
+  }
+
+  main {
+    width: 80%;
+  }
+
+  form {
+    width: 80%;
+    font-size: 10px;
+  }
+
+  form textarea {
+    width: 80%;
+  }
+
+  main h3 {
+    font-size: 16px;
+  }
+
+  main button {
+    font-size: 10px;
+  }
 }

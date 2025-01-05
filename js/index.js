@@ -1,17 +1,14 @@
 const kuyTodo = document.querySelector("form");
 const kuyInput = document.getElementById("input-form");
 const kuyLevel = document.getElementById("todo-level");
-const kuyListUL = document.getElementById("todo-list");
+const kuyListTableHead = document.getElementById("todo-list-header");
+const kuyListTableBody = document.getElementById("todo-list");
 const kuyHeader = document.querySelector(".todo-header");
 const kuyHeaderDone = document.querySelector(".todo-header-done");
-const doneListUL = document.getElementById("done-list");
-const currentDate = new Date();
-const isoString = currentDate.toISOString();
-const date = isoString.split("T")[0];
-const time = isoString.split("T")[1].split(".")[0];
-const formattedDateTime = `${date} ${time}`;
+const doneListTableBody = document.getElementById("done-list");
 const deleteTodoList = document.querySelector(".delete-list");
-// const deleteTodoList = document.querySelector(".todolist-delete");
+const deleteDoneList = document.querySelector(".delete-done-list");
+const kuyListTableDone = document.getElementById("todo-done-list");
 
 let allTodos = [];
 let doneTodos = [];
@@ -22,114 +19,153 @@ kuyTodo.addEventListener("submit", function (e) {
 });
 
 function addTodo() {
-  const kuyText = kuyInput.value;
+  const kuyText = kuyInput.value.trim();
   const kuyLevelTodo = kuyLevel.value;
+
   if (kuyText.length > 0 && kuyLevelTodo.length > 0) {
     allTodos.push({ text: kuyText, level: kuyLevelTodo });
-    kuyHeader.innerText = "Daftar Tugas";
-    kuyHeaderDone.innerText = doneTodos.length > 0 ? "Tugas Selesai" : "";
-    updateKuyList();
     kuyInput.value = "";
-    kuyLevelTodo.value = "";
+    kuyLevel.value = "Low";
+    updateKuyList();
   } else {
-    alert("Harap isi tugas dan tanggal!");
+    alert("Harap isi tugas dan pilih level!");
   }
 }
 
 function updateKuyList() {
-  kuyListUL.innerHTML = "";
-  doneListUL.innerHTML = "";
+  kuyListTableBody.innerHTML = "";
+  doneListTableBody.innerHTML = "";
 
-  allTodos.forEach((todo, todoIndex) => {
-    const kuyItem = createTodoItem(todo, todoIndex);
-    kuyListUL.append(kuyItem);
+  allTodos.forEach((todo, index) => {
+    const kuyRow = createTodoRow(todo, index);
+    kuyListTableBody.appendChild(kuyRow);
   });
 
-  doneTodos.forEach((todo) => {
-    const kuyItem = createDoneItem(todo);
-    doneListUL.append(kuyItem);
+  doneTodos.forEach((todo, index) => {
+    const doneRow = createDoneRow(todo, index);
+    doneListTableBody.appendChild(doneRow);
   });
-
-  if (allTodos.length > 0) {
-    const listButton = document.createElement("button");
-    listButton.className = "todolist-delete";
-    listButton.innerText = allTodos.length > 0 ? "Hapus Semua Di List" : "";
-    deleteTodoList.appendChild(listButton);
-  } else {
-    const deleteTodoList = document.querySelector(".delete-list");
-    const listButton = deleteTodoList?.querySelector(".todolist-delete");
-    if (listButton) {
-      deleteTodoList.removeChild(listButton);
-    }
-  }
 
   kuyHeader.innerText = allTodos.length > 0 ? "Daftar Tugas" : "";
   kuyHeaderDone.innerText = doneTodos.length > 0 ? "Tugas Selesai" : "";
+  if (allTodos.length > 0) {
+    kuyListTableHead.innerHTML = `
+      <tr>
+        <th>Aksi</th>
+        <th>Tanggal</th>
+        <th>Tugas</th>
+        <th>Level</th>
+      </tr>
+    `;
+  } else {
+    kuyListTableHead.innerHTML = ""; // Hapus header jika tidak ada tugas
+  }
+
+  if (doneTodos.length > 0) {
+    kuyListTableDone.innerHTML = `
+     <tr>
+        <th>Tugas</th>
+        <th>Level</th>
+        <th>Aksi</th>
+        </tr>
+    `;
+  } else {
+    kuyListTableDone.innerHTML = ""; // Hapus header jika tidak ada tugas
+  }
+  handleDeleteButton();
+  handleDeleteDoneButton();
 }
 
-function createTodoItem(todo, todoIndex) {
-  const kuyId = "todo-" + todoIndex;
-  const kuyList = document.createElement("li");
-  kuyList.className = "todo";
-  kuyList.innerHTML = `
-    <input type="checkbox" id="${kuyId}" />
-    <label for="${kuyId}" class="detail-task">
-    <p class="date-todo">${formattedDateTime}</p>
-  
-      <span>${todo.text}</span>
-      <span class="${
-        todo.level === "Low"
-          ? "low"
-          : todo.level === "Medium"
-          ? "medium"
-          : "high"
-      }"></span>
-    </label>
+function createTodoRow(todo, index) {
+  const row = document.createElement("tr");
+
+  row.innerHTML = `
+    <td><input type="checkbox" data-index="${index}" /></td>
+    <td class="todo-line">${new Date().toLocaleString()}</td>
+    <td class="todo-line">${todo.text}</td>
+    <td class="${todo.level.toLowerCase()}">${todo.level}</td>
   `;
 
-  const kuyCheckbox = kuyList.querySelector(`#${kuyId}`);
-  kuyCheckbox.addEventListener("change", function () {
+  // const checkbox = row.querySelector("input[type='checkbox']");
+
+  const checkbox = row.querySelector("input[type='checkbox']");
+  const todoSubject = row.querySelector(".todo-line");
+  checkbox.addEventListener("change", () => moveToDone(index));
+
+  checkbox.addEventListener("change", function () {
     if (this.checked) {
-      setTimeout(function () {
-        moveToDone(todo, todoIndex);
-      }, 3000);
+      todoSubject.style.textDecoration = "line-through";
+      todoSubject.style.color = "gray";
+    } else {
+      todoSubject.style.textDecoration = "none";
+      todoSubject.style.color = "inherit";
     }
-    alert("Tugasnya kami selesaikan dalam 3 detik ya :)");
   });
 
-  return kuyList;
+  return row;
 }
 
-function createDoneItem(todo) {
-  const kuyList = document.createElement("li");
-  kuyList.className = "done";
-  kuyList.innerHTML = `
-    <span>${todo.text}</span><span>${todo.level}</span>
-    <button class="delete-button"><img src="./assets/images/delete-img.png" alt="trash"></button>
+function createDoneRow(todo, index) {
+  const row = document.createElement("tr");
+
+  row.innerHTML = `
+    <td>${todo.text}</td>
+    <td class="${todo.level.toLowerCase()}">${todo.level}</td>
+    <td><button class="delete-button"><img src="./assets/images/delete-img.png" alt="delete-img"></button></td>
   `;
 
-  const deleteButton = kuyList.querySelector(".delete-button");
-  deleteButton.addEventListener("click", function () {
-    const userConfirmed = confirm("Apa kamu yakin mau menghapus?");
-    if (userConfirmed) {
-      doneTodos.splice(doneTodos.indexOf(todo), 1);
+  const deleteButton = row.querySelector(".delete-button");
+  deleteButton.addEventListener("click", () => {
+    if (confirm("Apa kamu yakin mau menghapus?")) {
+      doneTodos.splice(index, 1);
       updateKuyList();
     }
   });
 
-  return kuyList;
+  return row;
 }
 
-deleteTodoList.addEventListener("click", function () {
-  const userConfirmed = confirm("Apa kamu yakin mau menghapus semua di list?");
-  if (userConfirmed) {
-    allTodos = [];
+function moveToDone(index) {
+  setTimeout(() => {
+    doneTodos.push(allTodos[index]);
+    allTodos.splice(index, 1);
     updateKuyList();
-  }
-});
-
-function moveToDone(todo, todoIndex) {
-  doneTodos.push(todo);
-  allTodos.splice(todoIndex, 1);
-  updateKuyList();
+  }, 1000);
 }
+
+function handleDeleteButton() {
+  deleteTodoList.innerHTML = "";
+
+  if (allTodos.length > 0) {
+    const button = document.createElement("button");
+    button.className = "todolist-delete";
+    button.innerText = "Hapus Semua Di List";
+    button.addEventListener("click", () => {
+      if (confirm("Apa kamu yakin mau menghapus semua tugas?")) {
+        allTodos = [];
+        updateKuyList();
+      }
+    });
+    deleteTodoList.appendChild(button);
+  }
+}
+
+function handleDeleteDoneButton() {
+  deleteDoneList.innerHTML = "";
+
+  if (doneTodos.length > 0) {
+    const doneButtonDelete = document.createElement("button");
+    doneButtonDelete.className = "todolist-delete";
+    doneButtonDelete.innerText = "Hapus Semua List Done";
+    doneButtonDelete.addEventListener("click", () => {
+      if (confirm("Apa kamu yakin mau menghapus semua tugas selesai?")) {
+        doneTodos = [];
+        updateKuyList();
+      }
+    });
+    deleteDoneList.appendChild(doneButtonDelete);
+  }
+}
+
+// Initial call to update the UI
+updateKuyList();
