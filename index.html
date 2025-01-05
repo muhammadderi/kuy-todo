@@ -22,14 +22,19 @@
           <form>
             <label for="input-form">Ayo Input Tugasmu</label>
             <br />
-            <textarea name="textarea" id="input-form" rows="3" cols="50">
+            <textarea
+              name="textarea"
+              id="input-form"
+              rows="3"
+              cols="50"
+              required
+            >
 Silahkan input tugasmu..</textarea
             >
             <br />
             <label for="kuy-level">Level Tugas </label>
             <br />
-            <select name="todo-level" id="todo-level">
-              <option value="#">Pilih Level</option>
+            <select name="todo-level" id="todo-level" required>
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
@@ -40,6 +45,7 @@ Silahkan input tugasmu..</textarea
         </section>
         <section class="kuy-section3">
           <h3 class="todo-header"></h3>
+          <span class="delete-list"></span>
           <ul id="todo-list"></ul>
         </section>
         <section class="kuy-section4">

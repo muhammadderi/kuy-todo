@@ -115,14 +115,15 @@ main {
   width: 100%;
   box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
+  padding: 0 10px;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   border: 2px solid var(--primary-color);
   border-radius: 5px;
   background-color: #5cb338;
   color: #fff;
-  padding: 0 20px;
+  margin: 0;
+  margin-bottom: 10px;
 }
 
 #todo-list {
@@ -135,6 +136,11 @@ main {
   justify-content: center;
   margin: 0;
   gap: 10px;
+}
+
+input[type="checkbox"]:checked + label {
+  text-decoration: line-through;
+  color: gray; /* Opsional, untuk membuat teks lebih pudar */
 }
 
 /* section 4 */
@@ -153,4 +159,59 @@ main {
 #done-list {
   padding: 0 20px;
   margin: 20px 0;
+}
+
+.done {
+  padding: 15px;
+  min-width: 400px;
+}
+
+.todo {
+  min-width: 400px;
+}
+
+.done button:hover {
+  background-color: red;
+  border-radius: 50px;
+}
+
+.todo-header-done {
+  color: var(--primary-color);
+}
+
+/* level priority */
+.low,
+.medium,
+.high {
+  width: 15px;
+  height: 15px;
+  border-radius: 50px;
+}
+
+.low {
+  background-color: green;
+}
+
+.medium {
+  background-color: yellow;
+}
+
+.high {
+  background-color: red;
+}
+
+/* delete list  */
+
+.todolist-delete {
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.todolist-delete:hover {
+  background-color: red;
+  color: #fff;
+  border: 2px solid var(--primary-color);
 }
